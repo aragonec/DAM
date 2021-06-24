@@ -1,5 +1,23 @@
 <resources>
     <string name="app_name">Hola Mundo</string>
-    <string name="nombre">Edgar Aragon</string>
+    <string name="title">Every bite a</string>
+    <string name="subtitle">Better Burger!</string>
+    <string name="cat1">Burgers</string>
+    <string name="cat2">Pasta</string>
+    <string name="cat3">Salads</string>
+    <string name="burger1">Beef Burger</string>
+    <string name="burger2">Chicken Burger</string>
+    <string name="burger3">Classic Burger</string>
+    <string name="burger4">Grilled Burger</string>
+    <string name="desc1">Onion with cheese</string>
+    <string name="desc2">Cheese with chicken</string>
+    <string name="desc3">Beef with lettuce</string>
+    <string name="desc4">Grilled chicken</string>
+    <string name="price1">$18.00</string>
+    <string name="price2">$12.00</string>
+    <string name="price3">$24.00</string>
+    <string name="price4">$14.00</string>
+
+
 
 </resources>
