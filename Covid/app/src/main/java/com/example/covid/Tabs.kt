@@ -14,18 +14,24 @@ import com.example.covid.databinding.ActivityTabsBinding
 class Tabs : AppCompatActivity() {
 
     private lateinit var binding: ActivityTabsBinding
+    lateinit var tabs: TabLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityTabsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
+        setContentView(binding.root)
         val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
         val viewPager: ViewPager = binding.viewPager
         viewPager.adapter = sectionsPagerAdapter
-        val tabs: TabLayout = binding.tabs
+        tabs = binding.tabs
         tabs.setupWithViewPager(viewPager)
+        cargarIconos()
 
+    }
+    fun cargarIconos(){
+        tabs.getTabAt(0)?.setIcon(android.R.drawable.ic_dialog_dialer)
+        tabs.getTabAt(1)?.setIcon(android.R.drawable.ic_dialog_map)
     }
 }

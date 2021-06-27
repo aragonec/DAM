@@ -23,14 +23,15 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
         // Return a PlaceholderFragment (defined as a static inner class below).
         //return PlaceholderFragment.newInstance(position + 1)
         when(position){
-            0 -> return FragmentHome()
-            1 -> return FragmentStats()
+            0 -> return com.example.covid.ui.main.FragmentHome()
+            1 -> return com.example.covid.ui.main.FragmentStats()
             else -> return PlaceholderFragment.newInstance(position + 1)
         }
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        return context.resources.getString(TAB_TITLES[position])
+        //return context.resources.getString(TAB_TITLES[position])
+        return ""
     }
 
     override fun getCount(): Int {

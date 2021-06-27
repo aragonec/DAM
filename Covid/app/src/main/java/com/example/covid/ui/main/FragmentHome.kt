@@ -5,7 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.covid.R
+import com.example.covid.adapters.AdapterPais
+import com.example.covid.adapters.AdapterFavorito
+import com.example.covid.models.Pais
+import com.example.covid.models.Favorito
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,7 +41,34 @@ class FragmentHome : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        var view = inflater.inflate(R.layout.fragment_home, container, false)
+
+        var recyclerViewFav = view.findViewById<RecyclerView>(R.id.recyclerViewFavoritos)
+        recyclerViewFav.layoutManager = LinearLayoutManager(view.context, LinearLayoutManager.HORIZONTAL,false)
+        var favoritos=ArrayList<Favorito>()
+        favoritos.add(Favorito("Mexico", "bandera.png"))
+        favoritos.add(Favorito("China", "bandera.png"))
+        favoritos.add(Favorito("Korea", "bandera.png"))
+        favoritos.add(Favorito("Australia", "bandera.png"))
+        favoritos.add(Favorito("Alemania", "bandera.png"))
+        favoritos.add(Favorito("Peru", "bandera.png"))
+        val adapterFav = AdapterFavorito(favoritos)
+        recyclerViewFav.adapter = adapterFav
+
+        var recyclerView = view.findViewById<RecyclerView>(R.id.recyclerViewPaises)
+        recyclerView.layoutManager = LinearLayoutManager(view.context, LinearLayoutManager.VERTICAL,false)
+        var paises=ArrayList<Pais>()
+        paises.add(Pais("Mexico", "bandera.png",120.00))
+        paises.add(Pais("Canada","bandera.png",10.00))
+        paises.add(Pais("Brazil","bandera.png",140.00))
+        paises.add(Pais("EUA","bandera.png",200.00))
+        paises.add(Pais("Japon","bandera.png",80.00))
+        paises.add(Pais("Luxemburgo","bandera.png",20.00))
+        paises.add(Pais("India","bandera.png",170.00))
+        val adapter = AdapterPais(paises)
+        recyclerView.adapter = adapter
+
+        return view
     }
 
     companion object {

@@ -4,12 +4,15 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/boton_blanco.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/boton_verde.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_principal.xml" value="0.18840579710144928" />
-        <entry key="app/src/main/res/layout/activity_tabs.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_tabs.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.47708333333333336" />
         <entry key="app/src/main/res/layout/fragment_stats.xml" value="0.14629629629629629" />
-        <entry key="app/src/main/res/layout/fragment_tabs.xml" value="0.14629629629629629" />
+        <entry key="app/src/main/res/layout/fragment_tabs.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item_favoritos.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/item_pais.xml" value="0.3578125" />
       </map>
     </option>
   </component>
@@ -18,5 +21,8 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="SuppressKotlinCodeStyleNotification">
+    <option name="disableForAll" value="true" />
   </component>
 </project>

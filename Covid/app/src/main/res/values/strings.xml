@@ -4,6 +4,12 @@
     <string name="t2">Covid 19</string>
     <string name="aceptar">Aceptar</string>
     <string name="conciente">Aprende la conciencia</string>
+    <string name="sintomas">5 Sintomas del covid</string>
+    <string name="leer">Leer mas</string>
+
+    <string name="top">Top Paises</string>
+    <string name="top_fav">Favoritos</string>
+
     <string name="title_activity_tabs">Tabs</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
