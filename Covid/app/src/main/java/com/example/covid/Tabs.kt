@@ -1,5 +1,6 @@
 package com.example.covid
 
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -11,6 +12,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import com.example.covid.ui.main.SectionsPagerAdapter
 import com.example.covid.databinding.ActivityTabsBinding
+import com.google.zxing.integration.android.IntentIntegrator
 
 
 class Tabs : AppCompatActivity() {
@@ -33,6 +35,31 @@ class Tabs : AppCompatActivity() {
 
     }
 
+    private fun initScanner(){
+        //IntentIntegrator(this).initiateScan()
+        var integrator =IntentIntegrator(this)
+        integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
+        integrator.setPrompt("Escanea el covid19 app para info")
+        integrator.setTorchEnabled(true)
+        integrator.setBeepEnabled(true)
+        integrator.initiateScan()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+        if (result != null){
+            if(result.contents==null){
+                Toast.makeText(applicationContext,"Cancelado", Toast.LENGTH_LONG).show()
+            }else{
+                Toast.makeText(applicationContext,"El valor escaneado es"+result.contents, Toast.LENGTH_LONG).show()
+                if(result.contents.equals("https://www.worldometers.info/coronavirus/")){
+                }
+            }
+        }else{
+            super.onActivityResult(requestCode, resultCode, data)
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_principal, menu)
         return true
@@ -41,6 +68,7 @@ class Tabs : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             R.id.camara_menu->{
+                initScanner()
                 Toast.makeText(applicationContext, "Hola", Toast.LENGTH_LONG).show()
                 return true
             }
