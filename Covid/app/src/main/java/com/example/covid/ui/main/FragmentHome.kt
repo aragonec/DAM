@@ -1,5 +1,6 @@
 package com.example.covid.ui.main
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,12 +9,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.Volley
 import com.example.covid.R
 import com.example.covid.adapters.AdapterPais
 import com.example.covid.adapters.AdapterFavorito
 import com.example.covid.conexion.Conexion
+import com.example.covid.config.Config
 import com.example.covid.models.Pais
 import com.example.covid.models.Favorito
+import org.json.JSONArray
 import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -50,6 +57,19 @@ class FragmentHome : Fragment() {
         var db = conexion.writableDatabase
         //db.execSQL("insert into favoritos (nombre, imagen) values('China', 'bandera.png')")
 
+        var recyclerView = view.findViewById<RecyclerView>(R.id.recyclerViewPaises)
+        recyclerView.layoutManager = LinearLayoutManager(view.context, LinearLayoutManager.VERTICAL,false)
+        var paises=ArrayList<Pais>()
+        paises.add(Pais("Mexico", "bandera.png",120.00))
+        paises.add(Pais("Canada","bandera.png",10.00))
+        paises.add(Pais("Brazil","bandera.png",140.00))
+        paises.add(Pais("EUA","bandera.png",200.00))
+        paises.add(Pais("Japon","bandera.png",80.00))
+        paises.add(Pais("Luxemburgo","bandera.png",20.00))
+        paises.add(Pais("India","bandera.png",170.00))
+        val adapter = AdapterPais(paises)
+        recyclerView.adapter = adapter
+
         var recyclerViewFav = view.findViewById<RecyclerView>(R.id.recyclerViewFavoritos)
         recyclerViewFav.layoutManager = LinearLayoutManager(view.context, LinearLayoutManager.HORIZONTAL,false)
         var favoritos= ArrayList<Favorito>()
@@ -65,23 +85,25 @@ class FragmentHome : Fragment() {
 
         val adapterFav = AdapterFavorito(favoritos)
         recyclerViewFav.adapter = adapterFav
-
-        var recyclerView = view.findViewById<RecyclerView>(R.id.recyclerViewPaises)
-        recyclerView.layoutManager = LinearLayoutManager(view.context, LinearLayoutManager.VERTICAL,false)
-        var paises=ArrayList<Pais>()
-        paises.add(Pais("Mexico", "bandera.png",120.00))
-        paises.add(Pais("Canada","bandera.png",10.00))
-        paises.add(Pais("Brazil","bandera.png",140.00))
-        paises.add(Pais("EUA","bandera.png",200.00))
-        paises.add(Pais("Japon","bandera.png",80.00))
-        paises.add(Pais("Luxemburgo","bandera.png",20.00))
-        paises.add(Pais("India","bandera.png",170.00))
-        val adapter = AdapterPais(paises)
-        recyclerView.adapter = adapter
+        recargar(view.context)
 
         return view
     }
+    fun recargar(context:Context){
+        var config = Config()
+        var url=config.ipServidor+"/countries"
+        var jsonObjectRequest = JsonArrayRequest(Request.Method.GET, url , null, Response.Listener {
+            respuesta:JSONArray->
+            for(i in 0 until respuesta.length()){
+                val item=respuesta.getJSONObject(i)
+                Log.e("SLUG", item.getString("Slug").toString())
+            }
+        },Response.ErrorListener{
 
+        })
+        val queue = Volley.newRequestQueue(context)
+        queue.add(jsonObjectRequest)
+    }
     companion object {
         /**
          * Use this factory method to create a new instance of
